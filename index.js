@@ -52,9 +52,9 @@ function createSessionsByUser(data) {
         duration = 0;
         console.log("first", eventsByUser[0]);
       }
+      // Calculate durations for rest of items
 
       /* If 10 minutes passed then create a new session and push it to the sessions array
-        + Calculate duration
       /*
 
       /* If 10 minutes did not pass then update the current session
