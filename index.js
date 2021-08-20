@@ -50,9 +50,11 @@ function createSessionsByUser(data) {
         eventsEvery10Mins[visitorId] = events;
         sessionInitTime = events.timestamp;
         duration = 0;
-        console.log("first", eventsByUser[0]);
+        // Push first item to array
+        eventsEvery10Mins.push(eventsByUser[visitorId]);
+        console.log("first", eventsByUser[visitorId]);
       }
-      // Calculate durations for rest of items
+      // Calculate durations for rest of items, then push those items as well
 
       /* If 10 minutes passed then create a new session and push it to the sessions array
       /*
