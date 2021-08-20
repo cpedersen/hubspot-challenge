@@ -15,36 +15,11 @@ fetch(url, {
     return createSessionsByUser(data);
   });
 
-/*
-const eventsByUser = {
-    'd1177368-2310-11e8-9e2a-9b860a0d9039': [
-        {
-            "url": "/pages/a-big-river",
-            "visitorId": "d1177368-2310-11e8-9e2a-9b860a0d9039",
-            "timestamp": 1512754436000
-        },
-        {
-             "url": "/pages/a-big-river",
-             "visitorId": "d1177368-2310-11e8-9e2a-9b860a0d9039",
-             "timestamp": 1512754583000
-         },
-         {
-             "url": "/pages/a-small-dog",
-             "visitorId": "d1177368-2310-11e8-9e2a-9b860a0d9039",
-             "timestamp": 1512754631000
-         },
-    ]
-}
-
-*/
-
 function createSessionsByUser(data) {
   console.log(data);
 
-  let eventsByUser = {};
-  //let eventsEvery10Mins = [];
-
   // Step #1 - group all events by visitorId
+  let eventsByUser = {};
   for (let x = 0; x <= data.events.length; x++) {
     let event = data.events[x];
     const { url, visitorId, timestamp } = event;
@@ -59,21 +34,28 @@ function createSessionsByUser(data) {
     return a.timestamp - b.timestamp;
   });
 
-  // Step #3 - Create sessions with events by 10-minute segments (10 minutes from the preceding)
-
+  // Step #3 - Create sessions with events by 10-minute segments (10 minutes from the preceding session)
   let eventsEvery10Mins = {};
+  let sessionInitTime = [];
+  // Loop through each user's events
   for (const visitorId in eventsByUser) {
     const events = eventsByUser[visitorId];
-    /*
-        Loop through user's events
-            - If it's the first event, then create a new session with it
-            - If 10 minutes passed then create a new session and push it to the sessions array
-            - If 10 minutes did not pass then update the current session
+    for (let x = 0; x < events.length; x++) {
+      // If it's the first event, then create a new session for this user
+      if (x === 0) {
+        eventsEvery10Mins[visitorId] = events;
+        sessionInitTime = events.timestamp;
+        console.log("sessionInitTime: " + sessionInitTime);
+      }
+      console.log("outside if statement");
+
+      // If 10 minutes passed then create a new session and push it to the sessions array
+
+      /* If 10 minutes did not pass then update the current session
                 + Add a new page to the session from the current event
-                + Calculate duration by adding a difference between the current event and previous event
-    */
-    for (let x = 0; x < events.length; x++) {}
+                + Calculate duration by adding a difference between the current event and previous event */
+    }
   }
 
-  //return sessionsByUser;
+  //return eventsEvery10Mins;
 }
