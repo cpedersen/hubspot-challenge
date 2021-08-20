@@ -4,6 +4,7 @@ const fetch = require("node-fetch");
 const api_token = process.env.API_TOKEN;
 const url = `https://candidate.hubteam.com/candidateTest/v3/problem/dataset?userKey=${api_token}`;
 
+// Do initial GET
 fetch(url, {
   method: "GET",
   headers: {
@@ -15,6 +16,7 @@ fetch(url, {
     return createSessionsByUser(data);
   });
 
+// Put together session information
 function createSessionsByUser(data) {
   console.log(data);
 
@@ -43,13 +45,17 @@ function createSessionsByUser(data) {
     for (let x = 0; x < events.length; x++) {
       // If it's the first event, then create a new session for this user
       let sessionInitTime = null;
+      let duration = null;
       if (x === 0) {
         eventsEvery10Mins[visitorId] = events;
         sessionInitTime = events.timestamp;
+        duration = 0;
         console.log("first", eventsByUser[0]);
       }
 
-      // If 10 minutes passed then create a new session and push it to the sessions array
+      /* If 10 minutes passed then create a new session and push it to the sessions array
+        + Calculate duration
+      /*
 
       /* If 10 minutes did not pass then update the current session
         + Add a new page to the session from the current event
@@ -57,5 +63,5 @@ function createSessionsByUser(data) {
     }
   }
 
-  // Add POST fetch here
+  // Add POST fetch here along with check of status
 }
