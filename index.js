@@ -52,10 +52,10 @@ function createSessionsByUser(data) {
       // If 10 minutes passed then create a new session and push it to the sessions array
 
       /* If 10 minutes did not pass then update the current session
-                + Add a new page to the session from the current event
-                + Calculate duration by adding a difference between the current event and previous event */
+        + Add a new page to the session from the current event
+        + Calculate duration by adding a difference between the current event and previous event */
     }
   }
 
-  //return eventsEvery10Mins;
+  // Add POST fetch here
 }
