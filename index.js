@@ -42,12 +42,12 @@ function createSessionsByUser(data) {
     const events = eventsByUser[visitorId];
     for (let x = 0; x < events.length; x++) {
       // If it's the first event, then create a new session for this user
+      let sessionInitTime = null;
       if (x === 0) {
         eventsEvery10Mins[visitorId] = events;
         sessionInitTime = events.timestamp;
-        console.log("sessionInitTime: " + sessionInitTime);
+        console.log("first", eventsByUser[0]);
       }
-      console.log("outside if statement");
 
       // If 10 minutes passed then create a new session and push it to the sessions array
 
